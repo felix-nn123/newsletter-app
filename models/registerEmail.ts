@@ -19,6 +19,8 @@ const registerEmailSchema = new Schema({
   },
 });
 
-const registerEmail = mongoose.model("registerEmail", registerEmailSchema);
+const registerEmail =
+  mongoose.models.registerEmailSchema ||
+  mongoose.model("registerEmail", registerEmailSchema);
 
 export default registerEmail;

@@ -1,13 +1,19 @@
 import connectionDB from "@/libs/mongodb";
 import registerEmail from "@/models/registerEmail";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function PUT(request: Request, { params: any }) {
+export async function PUT(request: NextRequest, { params: any }) {
   const { username, email } = await request.json();
   await connectionDB();
   const user = await registerEmail.findByIdAndUpdate(params.id, {
     username,
     email,
   });
+  return NextResponse.json({ data: user }, { status: 200 });
+}
+
+export async function GETBYID(request: Request, { params: any }) {
+  await connectionDB();
+  const user = await registerEmail.findById(params.id);
   return NextResponse.json({ data: user }, { status: 200 });
 }

@@ -1,8 +1,8 @@
 import connectionDB from "@/libs/mongodb";
 import registerEmail from "@/models/registerEmail";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   const { username, email } = await request.json();
   await connectionDB();
   await registerEmail.create({ username, email });
@@ -15,7 +15,7 @@ export async function GET() {
   return NextResponse.json(emails, { status: 200 });
 }
 
-export async function DELETE(request: Request) {
+export async function DELETE(request: NextRequest) {
   const id = request.nextUrl.searchParams.get("id");
   await connectionDB();
   await registerEmail.findByIdAndDelete(id);
