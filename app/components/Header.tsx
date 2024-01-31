@@ -6,7 +6,17 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
-const Header = () => {
+type Props = {
+  onClickSubmit: () => void;
+  onChangeTextInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
+};
+
+const Header = (
+  {
+    // onClickSubmit,
+    //  onChangeTextInput
+  }
+) => {
   return (
     <div className="w-full h-full bg-slate-100">
       <div className="flex w-full h-full overflow-hidden">
@@ -24,9 +34,14 @@ const Header = () => {
             id="standard-basic"
             label="Please enter your email address"
             variant="standard"
+            // onChange={onChangeTextInput}
           />
 
-          <Button className="w-1/3 mt-10 bg-gray-800" variant="contained">
+          <Button
+            // onClick={onClickSubmit}
+            className="w-1/3 mt-10 bg-gray-800"
+            variant="contained"
+          >
             Subscribe to newsletter
           </Button>
         </div>
