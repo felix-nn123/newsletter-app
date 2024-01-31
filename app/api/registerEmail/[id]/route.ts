@@ -12,7 +12,7 @@ export async function PUT(request: NextRequest, { params: any }) {
   return NextResponse.json({ data: user }, { status: 200 });
 }
 
-export async function GETBYID(request: Request, { params: any }) {
+export async function GET(request: Request, { params: any }) {
   await connectionDB();
   const user = await registerEmail.findById(params.id);
   return NextResponse.json({ data: user }, { status: 200 });
