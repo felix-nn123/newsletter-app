@@ -1,10 +1,11 @@
+"use client"; // This is a client componen
 import Image from "next/image";
 import Navbar from "./components/Navbar";
 import Header from "./components/Header";
-// import { useState } from "react";
+import { useState } from "react";
 
 export default function Home() {
-  // const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("");
   const onClickSubmit = () => {
     console.log("clicked");
   };
@@ -12,8 +13,8 @@ export default function Home() {
     <main className="w-full h-screen">
       <Navbar />
       <Header
-      // onClickSubmit={onClickSubmit}
-      // onChangeTextInput={(e) => setEmail(e.target.value)}
+        onClickSubmit={onClickSubmit}
+        onChangeTextInput={(e) => setEmail(e.target.value)}
       />
     </main>
   );

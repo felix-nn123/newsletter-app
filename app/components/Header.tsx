@@ -11,17 +11,12 @@ type Props = {
   onChangeTextInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-const Header = (
-  {
-    // onClickSubmit,
-    //  onChangeTextInput
-  }
-) => {
+const Header = ({ onClickSubmit, onChangeTextInput }) => {
   return (
     <div className="w-full h-full bg-slate-100">
-      <div className="flex w-full h-full overflow-hidden">
+      <div className="flex lg:flex-row md:flex-col w-full h-full overflow-hidden">
         <div className="flex-1 relative bg-text-black/50">
-          <div className="flex absolute w-full h-full justify-center items-center p-4 bg-[rgba(0,0,0,0.8)]">
+          <div className="flex absolute w-full h-full justify-center items-center p-4 bg-[rgba(0,0,0,0.5)]">
             <h3 className="text-5xl text-center text-white font-bold leading-relaxed">
               Welcome to our news app, please subscribe to our Newsletter
             </h3>
@@ -34,11 +29,11 @@ const Header = (
             id="standard-basic"
             label="Please enter your email address"
             variant="standard"
-            // onChange={onChangeTextInput}
+            onChange={onChangeTextInput}
           />
 
           <Button
-            // onClick={onClickSubmit}
+            onClick={onClickSubmit}
             className="w-1/3 mt-10 bg-gray-800"
             variant="contained"
           >
