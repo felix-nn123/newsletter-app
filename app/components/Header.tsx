@@ -9,9 +9,10 @@ import "@fontsource/roboto/700.css";
 type Props = {
   onClickSubmit: () => void;
   onChangeTextInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeUserName: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-const Header = ({ onClickSubmit, onChangeTextInput }) => {
+const Header = ({ onClickSubmit, onChangeTextInput, onChangeUserName }) => {
   return (
     <div className="w-full h-full bg-slate-100">
       <div className="flex lg:flex-row md:flex-col w-full h-full overflow-hidden">
@@ -24,6 +25,13 @@ const Header = ({ onClickSubmit, onChangeTextInput }) => {
           <img className="w-full h-full" src="images/news-background.jpg" />
         </div>
         <div className="flex flex-col w-full h-full  p-2 flex-1 bg-slate-300 justify-center items-center">
+          <TextField
+            className="w-2/3"
+            id="standard-basic"
+            label="Full Name"
+            variant="standard"
+            onChange={onChangeUserName}
+          />
           <TextField
             className="w-2/3"
             id="standard-basic"

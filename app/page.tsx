@@ -6,6 +6,8 @@ import { useState } from "react";
 
 export default function Home() {
   const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+
   const onClickSubmit = () => {
     console.log("clicked");
   };
@@ -15,6 +17,7 @@ export default function Home() {
       <Header
         onClickSubmit={onClickSubmit}
         onChangeTextInput={(e) => setEmail(e.target.value)}
+        onChangeUserName={(e) => setUsername(e.target.value)}
       />
     </main>
   );
