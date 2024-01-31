@@ -1,24 +1,24 @@
 import connectionDB from "@/libs/mongodb";
 import registerEmail from "@/models/registerEmail";
-import { useRouter } from "next/router";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function PUT(request: NextRequest) {
-  const router = useRouter();
-  const { id } = router.query;
+interface PropsParams {
+  params: { id: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+}
+
+export async function PUT(request: NextRequest, query: PropsParams) {
   const { username, email } = await request.json();
   await connectionDB();
-  const user = await registerEmail.findByIdAndUpdate(id, {
+  const user = await registerEmail.findByIdAndUpdate(query.params.id, {
     username,
     email,
   });
   return NextResponse.json({ data: user }, { status: 200 });
 }
 
-export async function GET(request: Request) {
-  const router = useRouter();
-  const { id } = router.query;
+export async function GET(request: Request, query: PropsParams) {
   await connectionDB();
-  const user = await registerEmail.findById(id);
+  const user = await registerEmail.findById(query.params.id);
   return NextResponse.json({ data: user }, { status: 200 });
 }
