@@ -7,18 +7,24 @@ interface PropsParams {
   searchParams: { [key: string]: string | string[] | undefined };
 }
 
-export async function PUT(request: NextRequest, query: PropsParams) {
+export async function PUT(
+  request: NextRequest,
+  { params, searchParams }: PropsParams
+) {
   const { username, email } = await request.json();
   await connectionDB();
-  const user = await registerEmail.findByIdAndUpdate(query.params.id, {
+  const user = await registerEmail.findByIdAndUpdate(params.id, {
     username,
     email,
   });
   return NextResponse.json({ data: user }, { status: 200 });
 }
 
-export async function GET(request: Request, query: PropsParams) {
+export async function GET(
+  request: Request,
+  { params, searchParams }: PropsParams
+) {
   await connectionDB();
-  const user = await registerEmail.findById(query.params.id);
+  const user = await registerEmail.findById(params.id);
   return NextResponse.json({ data: user }, { status: 200 });
 }
