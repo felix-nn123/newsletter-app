@@ -67,7 +67,7 @@ export async function POST(request: NextRequest) {
   const { username, email } = await request.json();
   await connectionDB();
 
-  const alreadyRegister = await registerEmail.findOne({ email });
+  const alreadyRegister = await registerEmail.findOne({ email: username });
   if (alreadyRegister) {
     return NextResponse.json(
       { message: "email already registered" },
@@ -75,7 +75,12 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  await registerEmail.create({ username, email });
+  await registerEmail.create({ username: email, email: username });
+
+  console.log(
+    "email========================email posted================",
+    email
+  );
 
   ////////////////////////////////////////////
   ///////register email to mailchimp//////////
