@@ -31,7 +31,7 @@ export default function Home() {
         setError("Please enter a valid username");
         return;
       }
-
+      
       const res = await PostRegisterEmail(email, username);
 
     } catch (error: unknown) {
@@ -40,7 +40,6 @@ export default function Home() {
   };
   return (
     <div className="w-full h-screen">
-      {/* @ts-expect-error Async Server Component */}
       <Navbar />
       <Header
         onClickSubmit={onClickSubmit}
