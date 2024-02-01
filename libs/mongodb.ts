@@ -6,7 +6,7 @@ interface processParams{
   }
 }
 
-const printEnv = (process: processParams ) => {
+const printEnv:string = (process: processParams ) => {
   return process.env.MONGO_URI
 };
 
