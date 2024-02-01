@@ -7,8 +7,8 @@ export function PostRegisterEmail(username: string, email: string) {
       },
       body: JSON.stringify({ username, email }),
     });
-  } catch (error) {
-    console.log(error.message);
+  } catch (error: unknown) {
+    // console.log(error.message);
   }
 }
 
@@ -17,8 +17,8 @@ export async function GetRegisterEmail() {
     return fetch("http://localhost:3000/api/registerEmail", {
       cache: "no-store",
     });
-  } catch (error) {
-    console.log(error.message);
+  } catch (error: unknown) {
+    // console.log(error.message);
   }
 }
 
@@ -27,7 +27,7 @@ export async function DeleteRegisterEmail(id: string) {
     return fetch(`http://localhost:3000/api/registerEmail/${id}`, {
       method: "DELETE",
     });
-  } catch (error) {
-    console.log(error.message);
+  } catch (error: unknown) {
+    // console.log(error.message);
   }
 }
