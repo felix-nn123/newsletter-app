@@ -52,46 +52,51 @@ const Header = ({
         </div>
 
         <div className="relative flex flex-col w-full h-full  p-2 flex-1 bg-slate-300 justify-center items-center">
-          {loading ? (
-            <Loading />
-          ) : (
-            <>
-              {success && (
-                <Alert
-                  className="absolute m-5 top-0 "
-                  icon={<CheckIcon fontSize="inherit" />}
-                  severity="success"
-                >
-                  Successfully subscribed to our newsletter
-                </Alert>
-              )}
-              <TextField
-                className="w-2/3"
-                id="standard-basic"
-                label="Full Name"
-                variant="standard"
-                onChange={onChangeUserName}
-              />
-              <TextField
-                className="w-2/3"
-                id="standard-basic"
-                label="Please enter your email address"
-                variant="standard"
-                onChange={onChangeTextInput}
-              />
-              <button
-                onClick={(e: React.MouseEvent) => onClickSubmit(e)}
-                className="w-1/3 mt-10 bg-gray-800 text-white p-3 rounded-3xl hover:bg-gray-100 hover:text-black"
-                type="submit"
+          <>
+            {loading ? (
+              <Loading />
+            ) : success ? (
+              <Alert
+                className="absolute m-5 top-0 "
+                icon={<CheckIcon fontSize="inherit" />}
+                severity="success"
               >
-                Subscribe to our newsletter
-              </button>
+                Successfully subscribed to our newsletter
+              </Alert>
+            ) : (
+              ""
+            )}
+            <TextField
+              className="w-2/3"
+              id="standard-basic"
+              label="Full Name"
+              variant="standard"
+              onChange={onChangeUserName}
+              required
+            />
+            <TextField
+              className="w-2/3"
+              id="standard-basic"
+              label="Please enter your email address"
+              variant="standard"
+              type="email"
+              required
+              onChange={onChangeTextInput}
+            />
 
-              <div className="flex justify-center items-center mt-4">
-                <p className="text-red-500 text-xs">{error}</p>
-              </div>
-            </>
-          )}
+            <button
+              onClick={(e: React.MouseEvent) => onClickSubmit(e)}
+              className="w-1/3 mt-10 bg-gray-800 text-white p-3 rounded-3xl hover:bg-gray-100 hover:text-black"
+              type="submit"
+              disabled={loading}
+            >
+              Subscribe to our newsletter
+            </button>
+
+            <div className="flex justify-center items-center mt-4">
+              <p className="text-red-500 text-xs">{error}</p>
+            </div>
+          </>
         </div>
       </div>
     </div>

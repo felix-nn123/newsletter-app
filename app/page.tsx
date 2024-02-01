@@ -54,8 +54,11 @@ export default function Home() {
         setSuccess(false);
         clearTimeout(timer);
       }, 5000);
-    } catch (error: unknown) {
-      // setError(error?.message);
+    } catch (ex: any) {
+      if (ex?.response?.status === 400) {
+        setError(ex?.response?.data?.message);
+        return;
+      }
     }
   };
 

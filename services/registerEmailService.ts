@@ -7,6 +7,7 @@ export async function PostRegisterEmail(username: string, email: string) {
       },
       body: JSON.stringify({ username, email }),
     });
+
     return res.json();
   } catch (error: unknown) {
     // console.log(error.message);
