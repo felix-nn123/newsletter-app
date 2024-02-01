@@ -1,12 +1,13 @@
-export function PostRegisterEmail(username: string, email: string) {
+export async function PostRegisterEmail(username: string, email: string) {
   try {
-    return fetch("http://localhost:3000/api/registerEmail", {
+    const res = await fetch("http://localhost:3000/api/registerEmail", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ username, email }),
     });
+    return res.json();
   } catch (error: unknown) {
     // console.log(error.message);
   }
@@ -14,9 +15,11 @@ export function PostRegisterEmail(username: string, email: string) {
 
 export async function GetRegisterEmail() {
   try {
-    return fetch("http://localhost:3000/api/registerEmail", {
+    const res = await fetch("http://localhost:3000/api/registerEmail", {
       cache: "no-store",
     });
+
+    return res.json();
   } catch (error: unknown) {
     // console.log(error.message);
   }
@@ -24,9 +27,10 @@ export async function GetRegisterEmail() {
 
 export async function DeleteRegisterEmail(id: string) {
   try {
-    return fetch(`http://localhost:3000/api/registerEmail/${id}`, {
+    const res = await fetch(`http://localhost:3000/api/registerEmail/${id}`, {
       method: "DELETE",
     });
+    return res.json();
   } catch (error: unknown) {
     // console.log(error.message);
   }
