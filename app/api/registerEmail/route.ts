@@ -20,7 +20,7 @@ const mailchimpFunc = async (email: string, username: string) => {
   }
 
   console.log(
-    "LNAME",
+    "FNAME",
     email
       .split(" ")
       .slice(email.split(" ").length - 1)
@@ -33,7 +33,7 @@ const mailchimpFunc = async (email: string, username: string) => {
         email_address: username,
         status: "subscribed",
         merge_fields: {
-          FNAME: email.split(" ").slice(1).join(" "),
+          FNAME: email.split(" ")[0],
           LNAME: email
             .split(" ")
             .slice(email.split(" ").length - 1)
