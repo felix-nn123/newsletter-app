@@ -1,6 +1,6 @@
 import connectionDB from "@/libs/mongodb";
 import registerEmail from "@/models/registerEmail";
-import fetch from "node-fetch";
+// import fetch from "node-fetch";
 import { NextRequest, NextResponse } from "next/server";
 
 /////////////////////////////////////////////////////
@@ -19,28 +19,37 @@ const mailchimpFunc = async (email: string, username: string) => {
     ];
   }
 
+  console.log(
+    "LNAME",
+    email
+      .split(" ")
+      .slice(email.split(" ").length - 1)
+      .join(" ")
+  );
+
   const data: mailData = {
     members: [
       {
-        email_address: email,
+        email_address: username,
         status: "subscribed",
         merge_fields: {
-          FNAME: username.split(" ").slice(1).join(" "),
-          LNAME: username
+          FNAME: email.split(" ").slice(1).join(" "),
+          LNAME: email
             .split(" ")
-            .slice(username.length - 2)
+            .slice(email.split(" ").length - 1)
             .join(" "),
         },
       },
     ],
   };
+  console.log(data);
 
   const postData: string = JSON.stringify(data);
 
-  fetch("https://us17.api.mailchimp.com/3.0/lists/4fbc534c0d", {
+  fetch("https://us21.api.mailchimp.com/3.0/lists/270eb537da", {
     method: "POST",
     headers: {
-      Authorization: "auth db9b68b89c3a7f273d4da8bb0c493d3f-us17",
+      Authorization: "auth 723704318b4876b0d734a7b5c0be111b-us21",
     },
     body: postData,
   })
