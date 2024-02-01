@@ -1,5 +1,4 @@
 "use client"; // This is a client componen
-// /* @ts-expect-error Async Server Component */
 import Navbar from "../components/Navbar";
 import Header from "../components/Header";
 import React, { useEffect, useState } from "react";
@@ -19,6 +18,7 @@ export default function Home() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [users, setUsers] = useState([]);
+  const [success, setSuccess] = useState(false);
 
   useEffect(() => {
     getData();
@@ -47,7 +47,13 @@ export default function Home() {
       setUsername("");
       setEmail("");
       setLoading(false);
-      console.log("REGISTERED EMAIL", res);
+      setSuccess(true);
+      setError("");
+
+      let timer = setTimeout(() => {
+        setSuccess(false);
+        clearTimeout(timer);
+      }, 5000);
     } catch (error: unknown) {
       // setError(error?.message);
     }
@@ -63,6 +69,7 @@ export default function Home() {
           onChangeUserName={(e) => setUsername(e.target.value)}
           error={error}
           loading={loading}
+          success={success}
         />
       </div>
     </>

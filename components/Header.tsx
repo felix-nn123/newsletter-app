@@ -2,6 +2,8 @@
 
 import React from "react";
 import { Button, TextField } from "@mui/material";
+import Alert from "@mui/material/Alert";
+import CheckIcon from "@mui/icons-material/Check";
 import { Lobster } from "next/font/google";
 import Loading from "./Loading";
 
@@ -11,6 +13,7 @@ type Props = {
   onChangeUserName: (e: React.ChangeEvent<HTMLInputElement>) => void;
   error: string;
   loading: boolean;
+  success: boolean;
 };
 
 const lobster = Lobster({
@@ -24,31 +27,44 @@ const Header = ({
   onChangeUserName,
   error,
   loading,
+  success,
 }: Props) => {
   return (
     <div className="w-full h-full bg-slate-100">
       <div className="flex lg:flex-row md:flex-col w-full h-full overflow-hidden">
         <div className="flex-1 relative bg-text-black/50">
+          <img
+            className="absolute w-full h-full"
+            src="images/news-background.jpg"
+          />
           <div
-            className={`flex flex-col absolute w-full h-full justify-center items-center p-4 bg-[rgba(0,0,0,0.5)]}`}
+            className={`flex flex-col absolute z-5 w-full h-full justify-center items-center p-4 bg-[rgba(0,0,0,0.9)]}`}
           >
             <h3
               className={`text-6xl text-center text-white font-bold leading-relaxed ${lobster.className}`}
             >
               Welcome to our news app
             </h3>
-            <p className="text-xl text-amber-500">
+            <h3 className="text-6xl text-center font-bold leading-relaxed text-blue-500">
               Please subscribe to our Newsletter
-            </p>
+            </h3>
           </div>
-          <img className="w-full h-full" src="images/news-background.jpg" />
         </div>
 
-        <div className="flex flex-col w-full h-full  p-2 flex-1 bg-slate-300 justify-center items-center">
+        <div className="relative flex flex-col w-full h-full  p-2 flex-1 bg-slate-300 justify-center items-center">
           {loading ? (
             <Loading />
           ) : (
             <>
+              {success && (
+                <Alert
+                  className="absolute m-5 top-0 "
+                  icon={<CheckIcon fontSize="inherit" />}
+                  severity="success"
+                >
+                  Successfully subscribed to our newsletter
+                </Alert>
+              )}
               <TextField
                 className="w-2/3"
                 id="standard-basic"
@@ -65,10 +81,10 @@ const Header = ({
               />
               <button
                 onClick={(e: React.MouseEvent) => onClickSubmit(e)}
-                className="w-1/3 mt-10 bg-gray-800 text-white p-3 rounded-3xl"
+                className="w-1/3 mt-10 bg-gray-800 text-white p-3 rounded-3xl hover:bg-gray-100 hover:text-black"
                 type="submit"
               >
-                Subscribe to newsletter
+                Subscribe to our newsletter
               </button>
 
               <div className="flex justify-center items-center mt-4">
