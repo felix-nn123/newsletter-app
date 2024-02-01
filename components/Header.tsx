@@ -1,18 +1,20 @@
+"use client";
 import React from "react";
 import { Button, TextField } from "@mui/material";
 
-import "@fontsource/roboto/300.css";
-import "@fontsource/roboto/400.css";
-import "@fontsource/roboto/500.css";
-import "@fontsource/roboto/700.css";
-
 type Props = {
-  onClickSubmit: () => void;
+  onClickSubmit: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeTextInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeUserName: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  error: string;
 };
 
-const Header = ({ onClickSubmit, onChangeTextInput, onChangeUserName }) => {
+const Header = ({
+  onClickSubmit,
+  onChangeTextInput,
+  onChangeUserName,
+  error,
+}: Props) => {
   return (
     <div className="w-full h-full bg-slate-100">
       <div className="flex lg:flex-row md:flex-col w-full h-full overflow-hidden">
@@ -39,14 +41,18 @@ const Header = ({ onClickSubmit, onChangeTextInput, onChangeUserName }) => {
             variant="standard"
             onChange={onChangeTextInput}
           />
-
           <Button
             onClick={onClickSubmit}
             className="w-1/3 mt-10 bg-gray-800"
             variant="contained"
+            type="submit"
           >
             Subscribe to newsletter
           </Button>
+
+          <div className="flex justify-center items-center mt-4">
+            <p className="text-red-500">{error}</p>
+          </div>
         </div>
       </div>
     </div>

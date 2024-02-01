@@ -14,12 +14,9 @@ export function PostRegisterEmail(username: string, email: string) {
 
 export async function GetRegisterEmail() {
   try {
-    const data = await fetch("http://localhost:3000/api/registerEmail", {
+    return fetch("http://localhost:3000/api/registerEmail", {
       cache: "no-store",
     });
-
-    if (!data.ok) throw new Error("Error fetching data");
-    return data.json();
   } catch (error) {
     console.log(error.message);
   }
@@ -27,11 +24,9 @@ export async function GetRegisterEmail() {
 
 export async function DeleteRegisterEmail(id: string) {
   try {
-    const data = await fetch(`http://localhost:3000/api/registerEmail/${id}`, {
+    return fetch(`http://localhost:3000/api/registerEmail/${id}`, {
       method: "DELETE",
     });
-
-    return data.json();
   } catch (error) {
     console.log(error.message);
   }

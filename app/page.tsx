@@ -1,32 +1,53 @@
 "use client"; // This is a client componen
-import Image from "next/image";
-import Navbar from "./components/Navbar";
-import Header from "./components/Header";
-import { useState } from "react";
+import Navbar from "../components/Navbar";
+import Header from "../components/Header";
+import React, { useState } from "react";
 import {
   GetRegisterEmail,
   PostRegisterEmail,
 } from "./services/registerEmailService";
 
-export default async function Home() {
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
+
+export default function Home() {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
+  const [error, setError] = useState("");
 
-  const res = await GetRegisterEmail();
-  console.log("All REGISTERED EMAILS", res);
+  // const res = await GetRegisterEmail();
+  // console.log("All REGISTERED EMAILS", res);
 
-  const onClickSubmit = async () => {
-    const res = await PostRegisterEmail(email, username);
-    console.log(res);
+  const onClickSubmit = async (e: React.SyntheticEvent) => {
+    try {
+      e.preventDefault();
+      if (!email) {
+        setError("Please enter a valid email address");
+        return;
+      }
+      if (!username) {
+        setError("Please enter a valid username");
+        return;
+      }
+      console.log("email", email);
+      const res = await PostRegisterEmail(email, username);
+      console.log(res);
+    } catch (error) {
+      setError(error.message);
+    }
   };
   return (
-    <main className="w-full h-screen">
+    <div className="w-full h-screen">
+      {/* @ts-expect-error Async Server Component */}
       <Navbar />
       <Header
         onClickSubmit={onClickSubmit}
         onChangeTextInput={(e) => setEmail(e.target.value)}
         onChangeUserName={(e) => setUsername(e.target.value)}
+        error={error}
       />
-    </main>
+    </div>
   );
 }
