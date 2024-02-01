@@ -3,7 +3,7 @@ import React from "react";
 import { Button, TextField } from "@mui/material";
 
 type Props = {
-  onClickSubmit: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onClickSubmit: (e: React.MouseEvent) => void;
   onChangeTextInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeUserName: (e: React.ChangeEvent<HTMLInputElement>) => void;
   error: string;
@@ -42,7 +42,7 @@ const Header = ({
             onChange={onChangeTextInput}
           />
           <button
-            onClick={onClickSubmit}
+            onClick={(e: React.MouseEvent)=>onClickSubmit(e)}
             className="w-1/3 mt-10 bg-gray-800 text-white p-3 rounded-3xl"
             type="submit"
           >
