@@ -31,10 +31,10 @@ export default function Home() {
         setError("Please enter a valid username");
         return;
       }
-      console.log("email", email);
+
       const res = await PostRegisterEmail(email, username);
       console.log(res);
-    } catch (error) {
+    } catch (error:object) {
       setError(error.message);
     }
   };

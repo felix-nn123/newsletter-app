@@ -51,7 +51,7 @@ const Header = ({
           </Button>
 
           <div className="flex justify-center items-center mt-4">
-            <p className="text-red-500">{error}</p>
+            <p className="text-red-500 text-xs">{error}</p>
           </div>
         </div>
       </div>
