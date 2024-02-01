@@ -41,14 +41,13 @@ const Header = ({
             variant="standard"
             onChange={onChangeTextInput}
           />
-          <Button
+          <button
             onClick={onClickSubmit}
-            className="w-1/3 mt-10 bg-gray-800"
-            variant="contained"
+            className="w-1/3 mt-10 bg-gray-800 text-white p-3 rounded-3xl"
             type="submit"
           >
             Subscribe to newsletter
-          </Button>
+          </button>
 
           <div className="flex justify-center items-center mt-4">
             <p className="text-red-500 text-xs">{error}</p>
