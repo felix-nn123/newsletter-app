@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
-const printEnv = (value: string | undefined) => {
+const printEnv = (value: string ) => {
+  console.log(value)
   return value
 };
 
