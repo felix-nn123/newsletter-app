@@ -33,7 +33,7 @@ export default function Home() {
       }
 
       const res = await PostRegisterEmail(email, username);
-      console.log(res);
+
     } catch (error: unknown) {
       // setError(error?.message);
     }
