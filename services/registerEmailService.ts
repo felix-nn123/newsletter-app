@@ -1,7 +1,7 @@
 export async function PostRegisterEmail(username: string, email: string) {
   try {
     const res = await fetch(
-      "https://newsletter-ijyc2dytu-felix-nkongho-ndifons-projects.vercel.app/api/registerEmail",
+      "https://newsletter-app-alpha.vercel.app/api/registerEmail",
       {
         method: "POST",
         headers: {
@@ -20,7 +20,7 @@ export async function PostRegisterEmail(username: string, email: string) {
 export async function GetRegisterEmail() {
   try {
     const res = await fetch(
-      "https://newsletter-ijyc2dytu-felix-nkongho-ndifons-projects.vercel.app/api/registerEmail",
+      "https://newsletter-app-alpha.vercel.app/api/registerEmail",
       {
         cache: "no-store",
       }
@@ -35,7 +35,7 @@ export async function GetRegisterEmail() {
 export async function DeleteRegisterEmail(id: string) {
   try {
     const res = await fetch(
-      `https://newsletter-ijyc2dytu-felix-nkongho-ndifons-projects.vercel.app/api/registerEmail/${id}`,
+      `https://newsletter-app-alpha.vercel.app/api/registerEmail/${id}`,
       {
         method: "DELETE",
       }

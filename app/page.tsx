@@ -73,6 +73,8 @@ export default function Home() {
           error={error}
           loading={loading}
           success={success}
+          username={username}
+          email={email}
         />
       </div>
     </>

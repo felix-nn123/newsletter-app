@@ -14,6 +14,8 @@ type Props = {
   error: string;
   loading: boolean;
   success: boolean;
+  username: string;
+  email: string;
 };
 
 const lobster = Lobster({
@@ -28,6 +30,8 @@ const Header = ({
   error,
   loading,
   success,
+  username,
+  email,
 }: Props) => {
   return (
     <div className="w-full h-full bg-slate-100">
@@ -73,6 +77,7 @@ const Header = ({
               variant="standard"
               onChange={onChangeUserName}
               required
+              value={username}
             />
             <TextField
               className="w-5/6 md:w-2/3"
@@ -82,6 +87,7 @@ const Header = ({
               type="email"
               required
               onChange={onChangeTextInput}
+              value={email}
             />
 
             <button
