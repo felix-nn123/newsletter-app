@@ -1,4 +1,4 @@
-const URL: string = "";
+const URL: string = "https://newsletter-app-alpha.vercel.app";
 
 export async function PostRegisterEmail(username: string, email: string) {
   try {
