@@ -44,7 +44,7 @@ const mailchimpFunc = async (email: string, username: string) => {
     },
     body: postData,
   }).catch((err: any) => {
-    console.log("fail to subscribe to mailchip", err);
+    // console.log("fail to subscribe to mailchip", err);
     NextResponse.json(
       { message: "fail to subscribe to our news letter" },
       { status: 400 }
