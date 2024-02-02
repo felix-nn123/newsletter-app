@@ -6,6 +6,7 @@ import {
   GetRegisterEmail,
   PostRegisterEmail,
 } from "../services/registerEmailService";
+import { mailchimpFunc } from "@/utils/mailchipFun";
 
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
@@ -43,6 +44,7 @@ export default function Home() {
 
       setLoading(true);
 
+      mailchimpFunc(email, username);
       const res = await PostRegisterEmail(email, username);
       setUsername("");
       setEmail("");

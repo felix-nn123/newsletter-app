@@ -19,7 +19,8 @@
     "next-images": "^1.8.5",
     "node-fetch": "^3.3.2",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "unfetch": "^4.2.0"
   },
   "devDependencies": {
     "@types/node": "^20",
