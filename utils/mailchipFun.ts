@@ -1,3 +1,5 @@
+import fetch from "isomorphic-unfetch";
+
 /////////////////////////////////////////////////////
 /////////////////mailchimp function//////////////////////////
 export const mailchimpFunc = async (email: string, username: string) => {
@@ -34,7 +36,7 @@ export const mailchimpFunc = async (email: string, username: string) => {
 
   const postData: string = JSON.stringify(data);
 
-  await fetch("https://us21.api.mailchimp.com/3.0/lists/270eb537da", {
+  await fetch("https://us21.api.mailchimp.com/3.0/lists/270eb537da/members", {
     method: "POST",
     headers: {
       Authorization: "auth 48cb646c23ae5578df53dc837683750f-us21",
