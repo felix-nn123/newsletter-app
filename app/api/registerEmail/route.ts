@@ -1,6 +1,6 @@
 import connectionDB from "@/libs/mongodb";
 import registerEmail from "@/models/registerEmail";
-// import fetch from "node-fetch";
+import fetch from "node-fetch";
 import { NextRequest, NextResponse } from "next/server";
 
 /////////////////////////////////////////////////////
@@ -19,14 +19,6 @@ const mailchimpFunc = async (email: string, username: string) => {
     ];
   }
 
-  console.log(
-    "FNAME",
-    email
-      .split(" ")
-      .slice(email.split(" ").length - 1)
-      .join(" ")
-  );
-
   const data: mailData = {
     members: [
       {
@@ -42,25 +34,22 @@ const mailchimpFunc = async (email: string, username: string) => {
       },
     ],
   };
-  console.log(data);
 
   const postData: string = JSON.stringify(data);
 
   fetch("https://us21.api.mailchimp.com/3.0/lists/270eb537da", {
     method: "POST",
     headers: {
-      Authorization: "auth 723704318b4876b0d734a7b5c0be111b-us21",
+      Authorization: "auth 48cb646c23ae5578df53dc837683750f-us21",
     },
     body: postData,
-  })
-    .then((res: any) => console.log("successfully subscribe to mailchip", res))
-    .catch((err: any) => {
-      console.log("fail to subscribe to mailchip", err);
-      NextResponse.json(
-        { message: "fail to subscribe to our news letter" },
-        { status: 400 }
-      );
-    });
+  }).catch((err: any) => {
+    console.log("fail to subscribe to mailchip", err);
+    NextResponse.json(
+      { message: "fail to subscribe to our news letter" },
+      { status: 400 }
+    );
+  });
 };
 
 export async function POST(request: NextRequest) {
@@ -76,11 +65,6 @@ export async function POST(request: NextRequest) {
   }
 
   await registerEmail.create({ username: email, email: username });
-
-  console.log(
-    "email========================email posted================",
-    email
-  );
 
   ////////////////////////////////////////////
   ///////register email to mailchimp//////////
