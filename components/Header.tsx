@@ -1,11 +1,18 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button, TextField } from "@mui/material";
 import Alert from "@mui/material/Alert";
 import CheckIcon from "@mui/icons-material/Check";
 import { Lobster } from "next/font/google";
 import Loading from "./Loading";
+import MailchimpSubscribe from "react-mailchimp-subscribe";
+import NewsLetterForm from "./NewsLetterForm";
+import { on } from "events";
+import {
+  GetRegisterEmail,
+  PostRegisterEmail,
+} from "@/services/registerEmailService";
 
 type Props = {
   onClickSubmit: (e: React.MouseEvent) => void;
@@ -23,16 +30,55 @@ const lobster = Lobster({
   subsets: ["latin"],
 });
 
-const Header = ({
-  onClickSubmit,
-  onChangeTextInput,
-  onChangeUserName,
-  error,
-  loading,
-  success,
-  username,
-  email,
-}: Props) => {
+const Header = ({}) => {
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [users, setUsers] = useState([]);
+  const [success, setSuccess] = useState(false);
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = async () => {
+    const res = await GetRegisterEmail();
+    setUsers(res);
+  };
+
+  const onClickSubmit = async () => {
+    try {
+      if (!email) {
+        setError("Please enter a valid email address");
+        return;
+      }
+      if (!username) {
+        setError("Please enter a valid username");
+        return;
+      }
+
+      setLoading(true);
+
+      const res = await PostRegisterEmail(email, username);
+      setUsername("");
+      setEmail("");
+      setLoading(false);
+      setSuccess(true);
+      setError("");
+
+      let timer = setTimeout(() => {
+        setSuccess(false);
+        clearTimeout(timer);
+      }, 5000);
+    } catch (ex: any) {
+      if (ex?.response?.status === 400) {
+        setError(ex?.response?.data?.message);
+        return;
+      }
+    }
+  };
+
   return (
     <div className="w-full h-full bg-slate-100">
       <div className="flex  flex-col lg:flex-row w-full h-full overflow-hidden">
@@ -70,34 +116,40 @@ const Header = ({
             ) : (
               ""
             )}
-            <TextField
-              className="w-5/6 md:w-2/3"
-              id="standard-basic"
-              label="Full Name"
-              variant="standard"
-              onChange={onChangeUserName}
-              required
-              value={username}
+            <MailchimpSubscribe
+              url={
+                "https://app.us21.list-manage.com/subscribe/post?u=de51cdebee964a09b9b795a8b&amp;id=270eb537da&amp;f_id=008eeee6f0"
+              }
+              render={({ subscribe, status, message }: any) => (
+                <>
+                  <NewsLetterForm
+                    onClickSubmit={(e: React.MouseEvent) => {
+                      e.preventDefault();
+                      subscribe({
+                        EMAIL: email,
+                        FNAME: username.split(" ")[0],
+                        LNAME: username
+                          .split(" ")
+                          .slice(username.split(" ").length - 1)
+                          .join(" "),
+                      });
+                      onClickSubmit();
+                    }}
+                    onChangeTextInput={(
+                      e: React.ChangeEvent<HTMLInputElement>
+                    ) => setEmail(e.target.value)}
+                    onChangeUserName={(
+                      e: React.ChangeEvent<HTMLInputElement>
+                    ) => setUsername(e.target.value)}
+                    error={error}
+                    loading={loading}
+                    success={success}
+                    username={username}
+                    email={email}
+                  />
+                </>
+              )}
             />
-            <TextField
-              className="w-5/6 md:w-2/3"
-              id="standard-basic"
-              label="Please enter your email address"
-              variant="standard"
-              type="email"
-              required
-              onChange={onChangeTextInput}
-              value={email}
-            />
-
-            <button
-              onClick={(e: React.MouseEvent) => onClickSubmit(e)}
-              className="w-4/5 md:w-1/3 mt-10 bg-gray-800 text-white p-3 rounded-3xl hover:bg-gray-100 hover:text-black"
-              type="submit"
-              disabled={loading}
-            >
-              Subscribe to our newsletter
-            </button>
 
             <div className="flex justify-center items-center mt-4">
               <p className="text-red-500 text-xs">{error}</p>
