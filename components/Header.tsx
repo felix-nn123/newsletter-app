@@ -14,17 +14,6 @@ import {
   PostRegisterEmail,
 } from "@/services/registerEmailService";
 
-type Props = {
-  onClickSubmit: (e: React.MouseEvent) => void;
-  onChangeTextInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onChangeUserName: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  error: string;
-  loading: boolean;
-  success: boolean;
-  username: string;
-  email: string;
-};
-
 const lobster = Lobster({
   weight: "400",
   subsets: ["latin"],
@@ -150,10 +139,6 @@ const Header = ({}) => {
                 </>
               )}
             />
-
-            <div className="flex justify-center items-center mt-4">
-              <p className="text-red-500 text-xs">{error}</p>
-            </div>
           </>
         </div>
       </div>
